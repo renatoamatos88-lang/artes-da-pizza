@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artes da Pizza — Proposta de Parceria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vinho:     #6B1010;
+    --vinho-esc: #3D0808;
+    --dourado:   #C9A84C;
+    --dourado-cl:#E8C97A;
+    --creme:     #F5E6C8;
+    --creme-esc: #C8B48A;
+    --off-white: #FAF7F2;
+    --papel:     #F3EDE3;
+    --cinza:     #7A6F64;
+    --escuro:    #2C1A0E;
+    --borda:     #E2D9C8;
+    --whatsapp:  #25D366;
+    --instagram: #E1306C;
+    --ifood:     #EA1D2C;
+    --keeta:     #FF6200;
+    --radius: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--escuro);
+  }
+
+  .nav-dots {
+    position: fixed; right: 20px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 10px; z-index: 100;
+  }
+  .nav-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--creme-esc); cursor: pointer; border: none;
+    transition: all 0.3s;
+  }
+  .nav-dot.active, .nav-dot:hover { background: var(--dourado); transform: scale(1.5); }
+
+  .slide {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; position: relative; overflow: hidden;
+    padding: 72px clamp(28px, 8vw, 110px);
+  }
+
+  /* ── CAPA ── */
+  .slide-capa { background: var(--vinho-esc); align-items: center; text-align: center; }
+  .slide-capa::before {
+    content: ''; position: absolute; inset: 18px;
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 6px; pointer-events: none;
+  }
+
+  .capa-eyebrow {
+    font-size: 10px; letter-spacing: 5px; color: var(--dourado);
+    text-transform: uppercase; margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .capa-ring {
+    width: 112px; height: 112px; border-radius: 50%;
+    border: 1.5px solid var(--dourado);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px; position: relative;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .capa-ring::before {
+    content: ''; position: absolute; inset: 7px; border-radius: 50%;
+    border: 0.5px solid rgba(201,168,76,0.35);
+  }
+  .capa-ring-letter { font-size: 48px; font-weight: 700; color: var(--dourado); line-height: 1; }
+  .capa-title {
+    font-size: clamp(32px, 5.5vw, 60px); font-weight: 700;
+    color: var(--creme); letter-spacing: 8px; margin-bottom: 6px;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .capa-ornament {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin: 14px 0 18px;
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .orn-line { flex: 1; max-width: 72px; height: 1px; background: var(--dourado); opacity: 0.45; }
+  .orn-diamond { width: 6px; height: 6px; background: var(--dourado); transform: rotate(45deg); }
+  .capa-sub {
+     font-size: 15px; color: var(--creme-esc); margin-bottom: 44px;
+    opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
+  }
+  .capa-tags {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.9s forwards;
+  }
+  .brand-tag {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 16px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; border: 1.5px solid transparent;
+  }
+  .brand-tag svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .tag-ifood     { background: rgba(234,29,44,0.15);  color: #FF7B85; border-color: rgba(234,29,44,0.3); }
+  .tag-keeta     { background: rgba(255,98,0,0.15);   color: #FFB080; border-color: rgba(255,98,0,0.3); }
+  .tag-whatsapp  { background: rgba(37,211,102,0.15); color: #5EF09A; border-color: rgba(37,211,102,0.3); }
+  .tag-instagram { background: rgba(225,48,108,0.15); color: #FF90BB; border-color: rgba(225,48,108,0.3); }
+  .tag-limao     { background: rgba(201,168,76,0.1);  color: var(--dourado-cl); border-color: rgba(201,168,76,0.25);  font-weight: 400; }
+
+  /* ── DIAGNÓSTICO ── */
+  .slide-diag { background: var(--off-white); }
+
+  .slide-label { font-size: 10px; letter-spacing: 4px; color: var(--dourado); text-transform: uppercase; margin-bottom: 10px; }
+  .slide-title { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: var(--vinho-esc); line-height: 1.15; margin-bottom: 6px; }
+  .slide-subtitle {  font-size: 14px; color: var(--cinza); margin-bottom: 44px; }
+
+  .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .diag-card {
+    background: white; border-radius: var(--radius); padding: 26px 22px;
+    border: 1px solid var(--borda); position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .diag-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(60,20,10,0.07); }
+  .diag-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .bar-red   { background: var(--ifood); }
+  .bar-amber { background: var(--dourado); }
+  .bar-gray  { background: var(--cinza); }
+
+  .diag-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .diag-icon svg { width: 22px; height: 22px; }
+  .ic-red    { background: #FEF0F0; }
+  .ic-amber  { background: #FEF8EC; }
+  .ic-gray   { background: #F2EDE8; }
+
+  .diag-card-title { font-size: 15px; font-weight: 700; color: var(--escuro); margin-bottom: 8px; }
+  .diag-card-text  {  font-size: 13px; color: var(--cinza); line-height: 1.65; }
+
+  /* ── PACOTE ── */
+  .slide-pacote { background: var(--papel); }
+  .pacote-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 56px; }
+  .pacote-sep  { background: var(--borda); align-self: stretch; }
+  .col-head { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--borda); }
+  .col-yes { color: #1A8A52; }
+  .col-no  { color: #A02020; }
+
+  .p-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px; }
+  .p-mark { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .mark-yes { background: #E6F9F0; color: #1A8A52; }
+  .mark-no  { background: #FDECEA; color: #A02020; }
+  .p-title { font-size: 14px; font-weight: 700; color: var(--escuro); margin-bottom: 2px; }
+  .p-sub   {  font-size: 12px; color: var(--cinza); }
+
+  .brand-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 100px; margin-right: 3px; vertical-align: middle;
+  }
+  .pill-ifood     { background: rgba(234,29,44,0.1);  color: var(--ifood); }
+  .pill-keeta     { background: rgba(255,98,0,0.1);   color: var(--keeta); }
+  .pill-whatsapp  { background: rgba(37,211,102,0.12);color: #1a7a3d; }
+  .pill-instagram { background: rgba(225,48,108,0.1); color: var(--instagram); }
+
+  /* ── INVESTIMENTO ── */
+  .slide-inv {
+    background: var(--off-white);
+    display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 72px; align-items: center;
+  }
+  .inv-sep { background: var(--borda); align-self: stretch; }
+  .inv-label  { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px; }
+  .inv-big    { font-size: clamp(52px, 9vw, 88px); font-weight: 700; color: var(--vinho-esc); line-height: 1; margin-bottom: 6px; }
+  .inv-period {  font-size: 14px; color: var(--cinza); margin-bottom: 22px; }
+  .inv-total  {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--vinho-esc); color: var(--creme);
+    padding: 10px 20px; border-radius: 8px; font-size: 13px;
+  }
+  .inv-total strong { color: var(--dourado-cl); }
+
+  .inv-row { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--borda); }
+  .inv-row:last-child { border-bottom: none; }
+  .inv-icon {
+    width: 38px; height: 38px; border-radius: 9px; background: var(--papel);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .inv-icon svg { width: 20px; height: 20px; }
+  .inv-row-title { font-size: 14px; font-weight: 700; color: var(--escuro); margin-bottom: 3px; }
+  .inv-row-sub   {  font-size: 12px; color: var(--cinza); }
+
+  /* ── CRONOGRAMA ── */
+  .slide-crono { background: var(--papel); }
+  .crono-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 44px; }
+  .crono-card {
+    background: white; border-radius: var(--radius); padding: 30px 24px;
+    border: 1px solid var(--borda); position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .crono-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(60,20,10,0.08); }
+  .crono-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--dourado); }
+  .crono-ghost { font-size: 72px; font-weight: 700; color: rgba(201,168,76,0.1); position: absolute; top: 8px; right: 16px; line-height: 1; }
+  .crono-period { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px; }
+  .crono-title  { font-size: 20px; font-weight: 700; color: var(--vinho-esc); margin-bottom: 12px; }
+  .crono-sep    { width: 30px; height: 2px; background: var(--dourado); margin-bottom: 14px; }
+  .crono-text   {  font-size: 13px; color: var(--cinza); line-height: 1.7; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity:1; transform:none; }
+  .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+
+  @media(max-width:768px){
+    .pacote-grid,.slide-inv{grid-template-columns:1fr;}
+    .pacote-sep,.inv-sep{display:none;}
+    .crono-cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-dots">
+  <button class="nav-dot active" onclick="go(0)"></button>
+  <button class="nav-dot" onclick="go(1)"></button>
+  <button class="nav-dot" onclick="go(2)"></button>
+  <button class="nav-dot" onclick="go(3)"></button>
+  <button class="nav-dot" onclick="go(4)"></button>
+</nav>
+
+<!-- CAPA -->
+<section class="slide slide-capa" id="s0">
+  <p class="capa-eyebrow">Proposta de Parceria · 2026</p>
+  <div class="capa-ring"><span class="capa-ring-letter">A</span></div>
+  <h1 class="capa-title">ARTES DA PIZZA</h1>
+  <div class="capa-ornament">
+    <div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-diamond" style="margin-left:-6px"></div><div class="orn-line"></div>
+  </div>
+  <p class="capa-sub">Organizar, atualizar e fortalecer a presença<br>nas plataformas de delivery e no digital.</p>
+  <div class="capa-tags">
+    <span class="brand-tag tag-ifood">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      iFood
+    </span>
+    <span class="brand-tag tag-keeta">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 14h-2l-2-3-2 3h-2l3-4.5L8.5 8h2l2 3 2-3h2l-3 3.5 3 4.5z"/></svg>
+      Keeta
+    </span>
+    <span class="brand-tag tag-whatsapp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </span>
+    <span class="brand-tag tag-instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </span>
+    <span class="brand-tag tag-limao">Bairro do Limão · desde 2007</span>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="slide slide-diag" id="s1">
+  <p class="slide-label reveal">02 — O que foi encontrado</p>
+  <h2 class="slide-title reveal d1">Diagnóstico<br><span style="font-weight:300;opacity:0.8">realizado em abril / maio 2026</span></h2>
+  <p class="slide-subtitle reveal d2">Análise das plataformas de delivery e do perfil no Instagram.</p>
+  <div class="diag-grid">
+    <div class="diag-card reveal d1">
+      <div class="diag-bar bar-red"></div>
+      <div class="diag-icon ic-red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#EA1D2C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <h3 class="diag-card-title">iFood não recebia pedidos</h3>
+      <p class="diag-card-text">App desinstalado. 2 pedidos chegaram sem serem vistos — cancelamento automático. Taxa de 50%, meta do iFood é abaixo de 1%.</p>
+    </div>
+    <div class="diag-card reveal d2">
+      <div class="diag-bar bar-amber"></div>
+      <div class="diag-icon ic-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+      </div>
+      <h3 class="diag-card-title">Cardápio quase invisível</h3>
+      <p class="diag-card-text">Clientes viam só 6 produtos. Dezenas de pizzas estavam pausadas nas duas plataformas.</p>
+    </div>
+    <div class="diag-card reveal d3">
+      <div class="diag-bar bar-amber"></div>
+      <div class="diag-icon ic-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <h3 class="diag-card-title">Preços desatualizados</h3>
+      <p class="diag-card-text">Queijo e insumos subiram. Os valores nos apps ainda eram os antigos, sem refletir o custo real.</p>
+    </div>
+    <div class="diag-card reveal d4">
+      <div class="diag-bar bar-gray"></div>
+      <div class="diag-icon ic-gray">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7A6F64" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <h3 class="diag-card-title">Instagram sem diferencial</h3>
+      <p class="diag-card-text">Forno à lenha desde 2007, avaliação 5 estrelas no iFood — nada disso aparecia no perfil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PACOTE -->
+<section class="slide slide-pacote" id="s2">
+  <p class="slide-label reveal">03 — O que entra no pacote</p>
+  <h2 class="slide-title reveal d1">Escopo da parceria<br><span style="font-weight:300;opacity:0.8">o que está dentro e fora</span></h2>
+  <p class="slide-subtitle reveal d2">Clareza total para não gerar expectativas erradas.</p>
+  <div class="pacote-grid reveal d3">
+    <div>
+      <p class="col-head col-yes">✓ &nbsp;Incluso</p>
+      <div class="p-item">
+        <div class="p-mark mark-yes">✓</div>
+        <div><p class="p-title"><span class="brand-pill pill-ifood">iFood</span> Gestão completa</p><p class="p-sub">Gestor de pedidos, cardápio, preços e promoções</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-yes">✓</div>
+        <div><p class="p-title"><span class="brand-pill pill-keeta">Keeta</span> Revisão e atualização</p><p class="p-sub">Cardápio, acessos, preços e promoções</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-yes">✓</div>
+        <div><p class="p-title">Fotos das pizzas com IA</p><p class="p-sub">Gradual, conforme os sabores forem trabalhados</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-yes">✓</div>
+        <div><p class="p-title"><span class="brand-pill pill-whatsapp">WhatsApp</span> Cardápio digital</p><p class="p-sub">Criação e organização do catálogo</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-yes">✓</div>
+        <div><p class="p-title"><span class="brand-pill pill-instagram">Instagram</span> Informações básicas</p><p class="p-sub">Bio, link de pedido, horário e contato</p></div>
+      </div>
+    </div>
+    <div class="pacote-sep"></div>
+    <div>
+      <p class="col-head col-no">✕ &nbsp;Não incluso</p>
+      <div class="p-item">
+        <div class="p-mark mark-no">✕</div>
+        <div><p class="p-title">Criação de posts e artes</p><p class="p-sub">Design de conteúdo para feed</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-no">✕</div>
+        <div><p class="p-title">Gravação de vídeos e Reels</p><p class="p-sub">Captação e edição de vídeo</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-no">✕</div>
+        <div><p class="p-title">Gestão de redes sociais</p><p class="p-sub">Postagem, legenda, stories</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-no">✕</div>
+        <div><p class="p-title">Automações e e-mail marketing</p><p class="p-sub">Segundo momento, pacote à parte</p></div>
+      </div>
+      <div class="p-item">
+        <div class="p-mark mark-no">✕</div>
+        <div><p class="p-title">Criação de site</p><p class="p-sub">Segundo momento, pacote à parte</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section class="slide slide-inv" id="s3">
+  <div>
+    <p class="slide-label reveal">04 — Investimento</p>
+    <p class="inv-label reveal d1">valor mensal</p>
+    <p class="inv-big reveal d2">R$ 400</p>
+    <p class="inv-period reveal d3">por mês · 6 meses de parceria</p>
+    <div class="inv-total reveal d4">Total do contrato: &nbsp;<strong>R$ 2.400</strong></div>
+  </div>
+  <div class="inv-sep"></div>
+  <div>
+    <div class="inv-row reveal">
+      <div class="inv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6B1010" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div><p class="inv-row-title">Valor de mercado: R$ 800/mês</p><p class="inv-row-sub">O valor foi ajustado pelo contexto e pelo relacionamento.</p></div>
+    </div>
+    <div class="inv-row reveal d1">
+      <div class="inv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6B1010" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><p class="inv-row-title">Pagamento mensal</p><p class="inv-row-sub">6 meses para dar tempo de ver resultado.</p></div>
+    </div>
+    <div class="inv-row reveal d2">
+      <div class="inv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6B1010" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <div><p class="inv-row-title">Retorno rápido</p><p class="inv-row-sub">Com o cardápio visível e os pedidos chegando, poucos pedidos extras já cobrem o investimento.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOGRAMA -->
+<section class="slide slide-crono" id="s4">
+  <p class="slide-label reveal">05 — Cronograma</p>
+  <h2 class="slide-title reveal d1">O que muda<br><span style="font-weight:300;opacity:0.8">nos próximos 6 meses</span></h2>
+  <div class="crono-cards">
+    <div class="crono-card reveal d1">
+      <div class="crono-top-bar"></div>
+      <div class="crono-ghost">1</div>
+      <p class="crono-period">Mês 1</p>
+      <h3 class="crono-title">Operação sem travar</h3>
+      <div class="crono-sep"></div>
+      <p class="crono-text">Pedidos chegando e sendo vistos. Cardápio completo no iFood e na Keeta. Preços corretos nas duas plataformas.</p>
+    </div>
+    <div class="crono-card reveal d2">
+      <div class="crono-top-bar"></div>
+      <div class="crono-ghost">2</div>
+      <p class="crono-period">Meses 2–3</p>
+      <h3 class="crono-title">Tudo atualizado</h3>
+      <div class="crono-sep"></div>
+      <p class="crono-text">Fotos das pizzas no lugar. Cardápio no WhatsApp funcionando. Instagram com link de pedido e informações certas.</p>
+    </div>
+    <div class="crono-card reveal d3">
+      <div class="crono-top-bar"></div>
+      <div class="crono-ghost">3</div>
+      <p class="crono-period">Meses 4–6</p>
+      <h3 class="crono-title">Estabilidade</h3>
+      <div class="crono-sep"></div>
+      <p class="crono-text">Monitoramento mensal. Promoções ativas. Avaliação 5 estrelas mantida. Operação rodando sem surpresas.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.nav-dot');
+
+  function go(i){ slides[i].scrollIntoView({behavior:'smooth'}); }
+
+  slides.forEach(s => new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting && e.intersectionRatio > 0.5){
+        const i = [...slides].indexOf(e.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if(dots[i]) dots[i].classList.add('active');
+      }
+    });
+  },{threshold:0.5}).observe(s));
+
+  document.querySelectorAll('.reveal').forEach(el =>
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:0.15}).observe(el)
+  );
+</script>
+</body>
+</html>
