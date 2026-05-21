@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como instalar o WhatsApp Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vinho:    #6B1010;
+    --dourado:  #C9A84C;
+    --verde-wa: #25D366;
+    --verde-esc:#128C7E;
+    --bg:       #F7F5F2;
+    --card:     #FFFFFF;
+    --texto:    #1a1a1a;
+    --suave:    #6B6B6B;
+    --borda:    #E8E4DF;
+    --android:  #2D2D2D;
+    --tela:     #F0F0F0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    padding-bottom: 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--verde-esc);
+    padding: 32px 24px 28px;
+    text-align: center;
+    color: white;
+  }
+  .header-icon {
+    width: 64px; height: 64px;
+    background: white; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .header-icon svg { width: 40px; height: 40px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .header p  { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+
+  /* ── BLOCO ── */
+  .bloco {
+    margin: 24px 16px 0;
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borda);
+  }
+  .bloco-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--borda);
+  }
+  .bloco-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+    color: white;
+  }
+  .num-verde   { background: var(--verde-wa); }
+  .num-vinho   { background: var(--vinho); }
+  .num-dourado { background: var(--dourado); }
+
+  .bloco-title { font-size: 15px; font-weight: 700; }
+  .bloco-sub   { font-size: 12px; color: var(--suave); margin-top: 2px; }
+
+  /* ── PASSO ── */
+  .passo {
+    display: flex; gap: 14px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--borda);
+    align-items: flex-start;
+  }
+  .passo:last-child { border-bottom: none; }
+
+  .passo-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--borda);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--suave);
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .passo-content { flex: 1; }
+  .passo-title   { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .passo-desc    { font-size: 13px; color: var(--suave); line-height: 1.55; margin-bottom: 12px; }
+
+  /* ── PHONE MOCKUP ── */
+  .phone {
+    width: 100%; max-width: 300px;
+    background: var(--android);
+    border-radius: 22px;
+    padding: 10px;
+    margin: 0 auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .phone-screen {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .phone-bar {
+    background: var(--android);
+    height: 8px;
+    border-radius: 4px;
+    width: 40px;
+    margin: 8px auto 0;
+  }
+
+  /* Telas */
+  .tela-play {
+    background: white;
+    padding: 0;
+  }
+  .play-topbar {
+    background: #4285F4;
+    padding: 10px 14px 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .play-search {
+    flex: 1; background: white; border-radius: 20px;
+    padding: 6px 12px; font-size: 11px; color: #333;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .play-search-icon { color: #999; font-size: 12px; }
+  .play-result {
+    padding: 14px;
+    display: flex; gap: 12px; align-items: center;
+  }
+  .wa-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .wa-icon svg { width: 30px; height: 30px; }
+  .play-result-info .name { font-size: 12px; font-weight: 700; color: #222; }
+  .play-result-info .maker { font-size: 10px; color: #777; margin: 2px 0; }
+  .play-result-info .stars { font-size: 10px; color: #F4A400; }
+  .btn-instalar {
+    margin: 0 14px 14px;
+    background: #1A73E8; color: white;
+    border-radius: 6px; padding: 8px;
+    text-align: center; font-size: 12px; font-weight: 600;
+  }
+
+  .tela-numero {
+    background: white; padding: 16px 14px;
+    text-align: center;
+  }
+  .wa-logo-topo {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .tela-numero h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .tela-numero p  { font-size: 10px; color: #666; margin-bottom: 14px; line-height: 1.5; }
+  .campo-tel {
+    border: none; border-bottom: 2px solid #25D366;
+    width: 100%; text-align: center;
+    font-size: 16px; font-weight: 600; color: #333;
+    padding: 4px; margin-bottom: 16px;
+    outline: none; background: transparent;
+  }
+  .btn-wa {
+    background: #25D366; color: white;
+    border-radius: 24px; padding: 9px 24px;
+    font-size: 12px; font-weight: 700;
+    display: inline-block;
+  }
+
+  .tela-codigo {
+    background: white; padding: 16px 14px; text-align: center;
+  }
+  .tela-codigo h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .tela-codigo p  { font-size: 10px; color: #666; margin-bottom: 14px; line-height: 1.5; }
+  .codigo-boxes {
+    display: flex; gap: 6px; justify-content: center; margin-bottom: 16px;
+  }
+  .cod-box {
+    width: 32px; height: 38px; border: 1.5px solid #ddd; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #333;
+  }
+  .cod-box.filled { border-color: #25D366; background: #f0fdf4; }
+
+  .tela-nome {
+    background: white; padding: 16px 14px;
+  }
+  .tela-nome h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .tela-nome p  { font-size: 10px; color: #666; margin-bottom: 14px; }
+  .campo-nome {
+    border: none; border-bottom: 2px solid #25D366;
+    width: 100%; font-size: 14px; font-weight: 600; color: #333;
+    padding: 4px 0 4px; outline: none; background: transparent; margin-bottom: 12px;
+  }
+  .campo-label { font-size: 10px; color: #888; margin-bottom: 4px; display: block; }
+  .cat-sel {
+    border: 1.5px solid #ddd; border-radius: 8px;
+    padding: 8px 10px; font-size: 11px; color: #333;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .tela-ferramentas {
+    background: white;
+  }
+  .wa-topbar {
+    background: #128C7E; padding: 10px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .wa-topbar-title { color: white; font-size: 13px; font-weight: 700; }
+  .wa-topbar-dots  { color: white; font-size: 16px; letter-spacing: 2px; }
+  .menu-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border-bottom: 1px solid #f0f0f0;
+    font-size: 12px; color: #333;
+  }
+  .menu-item svg { width: 20px; height: 20px; color: #555; flex-shrink: 0; }
+  .menu-item.active { background: #f0fdf4; }
+  .menu-item.active svg { color: #25D366; }
+
+  .tela-catalogo {
+    background: white;
+  }
+  .cat-topbar {
+    background: #128C7E; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cat-back  { color: white; font-size: 14px; }
+  .cat-title { color: white; font-size: 13px; font-weight: 700; }
+  .cat-empty {
+    padding: 24px 14px; text-align: center;
+  }
+  .cat-empty-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #f5f5f5;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 26px;
+  }
+  .cat-empty p { font-size: 11px; color: #888; margin-bottom: 14px; line-height: 1.5; }
+  .btn-add {
+    background: #25D366; color: white;
+    border-radius: 24px; padding: 8px 20px;
+    font-size: 12px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  .tela-add-item {
+    background: white;
+  }
+  .add-topbar {
+    background: #128C7E; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .add-title { color: white; font-size: 13px; font-weight: 700; }
+  .add-foto-box {
+    margin: 14px;
+    border: 2px dashed #ddd; border-radius: 10px;
+    height: 80px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    color: #aaa; font-size: 10px;
+  }
+  .add-foto-box span { font-size: 22px; }
+  .campo-add {
+    margin: 0 14px 10px;
+  }
+  .campo-add label { font-size: 10px; color: #888; display: block; margin-bottom: 2px; }
+  .campo-add input {
+    width: 100%; border: none; border-bottom: 1.5px solid #eee;
+    font-size: 13px; padding: 4px 0; outline: none; color: #333;
+  }
+  .campo-add input.filled { border-bottom-color: #25D366; }
+
+  /* ── DICA ── */
+  .dica {
+    margin: 12px 16px 0;
+    background: #FFF8E7;
+    border-left: 3px solid var(--dourado);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #7a5c00;
+    line-height: 1.55;
+  }
+  .dica strong { color: #5a4000; }
+
+  /* ── CONCLUÍDO ── */
+  .concluido {
+    margin: 24px 16px 0;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .concluido-icon { font-size: 40px; margin-bottom: 12px; }
+  .concluido h3   { font-size: 16px; font-weight: 700; color: #166534; margin-bottom: 8px; }
+  .concluido p    { font-size: 13px; color: #15803d; line-height: 1.55; }
+  .link-catalogo  {
+    display: inline-block; margin-top: 14px;
+    background: #25D366; color: white;
+    border-radius: 24px; padding: 10px 22px;
+    font-size: 13px; font-weight: 700;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-icon">
+    <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </div>
+  <h1>WhatsApp Business</h1>
+  <p>Guia completo para instalar e<br>montar o cardápio do zero</p>
+</div>
+
+
+<!-- BLOCO 1: INSTALAR -->
+<div class="bloco">
+  <div class="bloco-header">
+    <div class="bloco-num num-verde">1</div>
+    <div>
+      <div class="bloco-title">Instalar o aplicativo</div>
+      <div class="bloco-sub">Pelo celular, na Play Store</div>
+    </div>
+  </div>
+
+  <!-- Passo 1 -->
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-content">
+      <div class="passo-title">Abra a Play Store</div>
+      <div class="passo-desc">Procure o ícone da Play Store na tela inicial ou na gaveta de apps. É o ícone colorido em forma de triângulo.</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-play">
+            <div class="play-topbar">
+              <div class="play-search">
+                <span class="play-search-icon">🔍</span>
+                <span style="color:#555;font-size:11px;">Pesquisar apps e jogos</span>
+              </div>
+            </div>
+            <div style="padding:10px 14px 4px;font-size:10px;color:#555;font-weight:600;">SUGERIDO PARA VOCÊ</div>
+            <div class="play-result">
+              <div class="wa-icon">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div class="play-result-info">
+                <div class="name">WhatsApp Business</div>
+                <div class="maker">WhatsApp LLC</div>
+                <div class="stars">★★★★★ · Grátis</div>
+              </div>
+            </div>
+            <div class="btn-instalar">INSTALAR</div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 2 -->
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-content">
+      <div class="passo-title">Pesquise "WhatsApp Business"</div>
+      <div class="passo-desc">Toque na barra de busca e digite exatamente: <strong>WhatsApp Business</strong>. Atenção: não é o WhatsApp comum — procure o ícone verde com um "B".</div>
+    </div>
+  </div>
+
+  <!-- Passo 3 -->
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-content">
+      <div class="passo-title">Toque em "Instalar"</div>
+      <div class="passo-desc">O app é gratuito. Aguarde o download terminar e toque em "Abrir".</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BLOCO 2: CONFIGURAR -->
+<div class="bloco">
+  <div class="bloco-header">
+    <div class="bloco-num num-verde">2</div>
+    <div>
+      <div class="bloco-title">Configurar a conta</div>
+      <div class="bloco-sub">Só precisa fazer uma vez</div>
+    </div>
+  </div>
+
+  <!-- Passo 4 -->
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-content">
+      <div class="passo-title">Abra o WhatsApp Business e aceite os termos</div>
+      <div class="passo-desc">Na tela inicial, toque em "Concordar e continuar".</div>
+    </div>
+  </div>
+
+  <!-- Passo 5 -->
+  <div class="passo">
+    <div class="passo-num">5</div>
+    <div class="passo-content">
+      <div class="passo-title">Digite o número da pizzaria</div>
+      <div class="passo-desc">Coloque o número que os clientes já usam para falar com vocês. Toque em "Avançar".</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-numero">
+            <div class="wa-logo-topo">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <h3>Qual é o número da sua empresa?</h3>
+            <p>Você receberá um SMS com o código de verificação</p>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;border-bottom:2px solid #25D366;padding-bottom:4px;">
+              <span style="font-size:12px;color:#555;font-weight:600;">🇧🇷 +55</span>
+              <span style="font-size:14px;font-weight:600;color:#333;">(11) 98738-7066</span>
+            </div>
+            <div class="btn-wa">Avançar</div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 6 -->
+  <div class="passo">
+    <div class="passo-num">6</div>
+    <div class="passo-content">
+      <div class="passo-title">Digite o código de verificação</div>
+      <div class="passo-desc">Você vai receber um SMS com 6 números. Digite esse código na tela abaixo. Se não chegar em 1 minuto, toque em "Reenviar".</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-codigo">
+            <h3>Verificando seu número</h3>
+            <p>Aguardando o SMS com o código<br>enviado para +55 11 98738-7066</p>
+            <div class="codigo-boxes">
+              <div class="cod-box filled">3</div>
+              <div class="cod-box filled">8</div>
+              <div class="cod-box filled">4</div>
+              <div class="cod-box">_</div>
+              <div class="cod-box">_</div>
+              <div class="cod-box">_</div>
+            </div>
+            <div style="font-size:10px;color:#1A73E8;">Não recebi o código. Reenviar</div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 7 -->
+  <div class="passo">
+    <div class="passo-num">7</div>
+    <div class="passo-content">
+      <div class="passo-title">Coloque o nome da empresa e a categoria</div>
+      <div class="passo-desc">Nome: <strong>Artes da Pizza</strong><br>Categoria: toque e escolha <strong>"Restaurante"</strong> ou <strong>"Comida e bebida"</strong>. Depois toque em "Avançar".</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-nome">
+            <h3>Informações da empresa</h3>
+            <p>Adicione o nome e a categoria</p>
+            <span class="campo-label">Nome da empresa</span>
+            <input class="campo-nome filled" value="Artes da Pizza" readonly>
+            <span class="campo-label" style="margin-top:10px;display:block;">Categoria</span>
+            <div class="cat-sel">
+              <span>🍕 Restaurante</span>
+              <span style="color:#aaa;">▼</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dica">
+  ✅ <strong>Pronto!</strong> A conta já está criada. Agora é só montar o cardápio — que é a parte mais importante.
+</div>
+
+
+<!-- BLOCO 3: CATÁLOGO -->
+<div class="bloco" style="margin-top:24px;">
+  <div class="bloco-header">
+    <div class="bloco-num num-vinho">3</div>
+    <div>
+      <div class="bloco-title">Montar o cardápio (Catálogo)</div>
+      <div class="bloco-sub">Aqui os clientes vão ver e escolher as pizzas</div>
+    </div>
+  </div>
+
+  <!-- Passo 8 -->
+  <div class="passo">
+    <div class="passo-num">8</div>
+    <div class="passo-content">
+      <div class="passo-title">Toque nos três pontinhos ⋮ no canto superior direito</div>
+      <div class="passo-desc">Depois toque em <strong>"Ferramentas comerciais"</strong>.</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-ferramentas">
+            <div class="wa-topbar">
+              <div class="wa-topbar-title">WhatsApp Business</div>
+              <div class="wa-topbar-dots">⋮</div>
+            </div>
+            <div class="menu-item" style="background:#fff8e1;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="2"/></svg>
+              <span style="color:#92400e;font-weight:600;">Ferramentas comerciais</span>
+              <span style="margin-left:auto;color:#aaa;">›</span>
+            </div>
+            <div class="menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              Configurações
+              <span style="margin-left:auto;color:#aaa;">›</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 9 -->
+  <div class="passo">
+    <div class="passo-num">9</div>
+    <div class="passo-content">
+      <div class="passo-title">Toque em "Catálogo"</div>
+      <div class="passo-desc">Dentro de Ferramentas comerciais, você vai ver a opção <strong>Catálogo</strong>. Toque nela.</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-ferramentas">
+            <div class="wa-topbar" style="background:#075E54;">
+              <div class="wa-topbar-title">Ferramentas comerciais</div>
+            </div>
+            <div class="menu-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              <div>
+                <div style="font-weight:600;">Catálogo</div>
+                <div style="font-size:10px;color:#888;">Mostre seus produtos e serviços</div>
+              </div>
+              <span style="margin-left:auto;color:#aaa;">›</span>
+            </div>
+            <div class="menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              <div>
+                <div>Mensagem de ausência</div>
+                <div style="font-size:10px;color:#888;">Resposta automática</div>
+              </div>
+              <span style="margin-left:auto;color:#aaa;">›</span>
+            </div>
+            <div class="menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.14 2.2 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.27-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <div>
+                <div>Mensagem de saudação</div>
+                <div style="font-size:10px;color:#888;">Boas-vindas automáticas</div>
+              </div>
+              <span style="margin-left:auto;color:#aaa;">›</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 10 -->
+  <div class="passo">
+    <div class="passo-num">10</div>
+    <div class="passo-content">
+      <div class="passo-title">Toque no "+" para adicionar a primeira pizza</div>
+      <div class="passo-desc">O catálogo começa vazio. Toque no botão <strong>"Adicionar produto"</strong> para começar.</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-catalogo">
+            <div class="cat-topbar">
+              <span class="cat-back">←</span>
+              <span class="cat-title">Catálogo</span>
+            </div>
+            <div class="cat-empty">
+              <div class="cat-empty-icon">🛍️</div>
+              <p>Seu catálogo está vazio.<br>Adicione os sabores das pizzas<br>para os clientes verem.</p>
+              <div class="btn-add">
+                <span>+</span> Adicionar produto
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 11 -->
+  <div class="passo">
+    <div class="passo-num">11</div>
+    <div class="passo-content">
+      <div class="passo-title">Preencha os dados de cada pizza</div>
+      <div class="passo-desc">Para cada sabor, preencha:<br><br>
+        📷 <strong>Foto</strong> — tire uma foto ou escolha da galeria<br>
+        🍕 <strong>Nome</strong> — ex: Pizza Calabresa<br>
+        💰 <strong>Preço</strong> — ex: R$ 49,90<br>
+        📝 <strong>Descrição</strong> — ingredientes (opcional)<br><br>
+        Depois toque em <strong>"Salvar"</strong>.
+      </div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="tela-add-item">
+            <div class="add-topbar">
+              <span style="color:white;font-size:14px;">←</span>
+              <span class="add-title">Adicionar produto</span>
+            </div>
+            <div class="add-foto-box">
+              <span>📷</span>
+              <div>Toque para adicionar foto</div>
+            </div>
+            <div class="campo-add">
+              <label>Nome do produto *</label>
+              <input class="filled" value="Pizza Calabresa" readonly>
+            </div>
+            <div class="campo-add">
+              <label>Preço</label>
+              <input class="filled" value="R$ 49,90" readonly>
+            </div>
+            <div class="campo-add">
+              <label>Descrição (opcional)</label>
+              <input value="Molho de tomate, mussarela..." readonly>
+            </div>
+            <div style="margin:14px;background:#25D366;color:white;border-radius:24px;padding:10px;text-align:center;font-size:13px;font-weight:700;">Salvar</div>
+          </div>
+        </div>
+        <div class="phone-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Passo 12 -->
+  <div class="passo">
+    <div class="passo-num">12</div>
+    <div class="passo-content">
+      <div class="passo-title">Repita para cada sabor</div>
+      <div class="passo-desc">Volte ao catálogo e toque em "+" para adicionar o próximo sabor. Faça isso para todas as pizzas — tradicionais, especiais e doces em categorias separadas.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dica">
+  💡 <strong>Dica:</strong> Não precisa adicionar tudo de uma vez. Pode salvar, fechar o app e continuar depois. O catálogo fica salvo automaticamente.
+</div>
+
+
+<!-- CONCLUÍDO -->
+<div class="concluido">
+  <div class="concluido-icon">🎉</div>
+  <h3>Cardápio no ar!</h3>
+  <p>Quando um cliente entrar no WhatsApp da pizzaria, vai ver o botão <strong>"Ver catálogo"</strong> e poderá escolher as pizzas e mandar o pedido direto no chat.<br><br>Você também pode compartilhar o link do cardápio:<br><strong>wa.me/c/5511987387066</strong></p>
+</div>
+
+<div class="dica" style="margin-top:16px;">
+  🙋 <strong>Ficou com dúvida?</strong> Me manda mensagem que a gente marca um dia e faço com você. Mas preciso que os preços já estejam todos anotados antes do nosso encontro, tá?
+</div>
+
+</body>
+</html>
