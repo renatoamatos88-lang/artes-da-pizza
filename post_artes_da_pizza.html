@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artes da Pizza — Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: #1a0505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: #1a0505;
+  }
+
+  /* ── FOTO ── */
+  .pizza-img {
+    width: 100%;
+    height: 68%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    filter: saturate(1.1) contrast(1.04);
+  }
+
+  /* fallback se não tiver imagem */
+  .pizza-img-placeholder {
+    width: 100%;
+    height: 68%;
+    background: linear-gradient(135deg, #5a2a0a 0%, #8b4513 40%, #3d0808 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: rgba(201,168,76,0.4);
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+
+  /* ── GRADIENTE ── */
+  .gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(29, 6, 6, 0.55) 25%,
+      rgba(29, 6, 6, 0.92) 45%,
+      #1d0606 58%
+    );
+    pointer-events: none;
+  }
+
+  /* ── BORDAS DECORATIVAS ── */
+  .frame-tl, .frame-tr, .frame-bl, .frame-br {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+  .frame-tl { top: 24px; left: 24px; border-top: 1px solid rgba(201,168,76,0.45); border-left: 1px solid rgba(201,168,76,0.45); }
+  .frame-tr { top: 24px; right: 24px; border-top: 1px solid rgba(201,168,76,0.45); border-right: 1px solid rgba(201,168,76,0.45); }
+  .frame-bl { bottom: 24px; left: 24px; border-bottom: 1px solid rgba(201,168,76,0.45); border-left: 1px solid rgba(201,168,76,0.45); }
+  .frame-br { bottom: 24px; right: 24px; border-bottom: 1px solid rgba(201,168,76,0.45); border-right: 1px solid rgba(201,168,76,0.45); }
+
+  /* ── TAGLINE (sobre a imagem) ── */
+  .tagline {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(232, 201, 122, 0.85);
+    letter-spacing: 4px;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+  }
+
+  /* ── SEÇÃO DA MARCA ── */
+  .brand-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Ornamento superior */
+  .orn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .orn-line { width: 160px; height: 0.5px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.6)); }
+  .orn-line.rev { background: linear-gradient(to left, transparent, rgba(201,168,76,0.6)); }
+  .orn-dot { width: 4px; height: 4px; background: #C9A84C; border-radius: 50%; }
+  .orn-diamond { width: 5px; height: 5px; background: #C9A84C; transform: rotate(45deg); }
+
+  /* Telefones */
+  .phones {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+  .phone {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #E8C97A;
+    letter-spacing: 4px;
+  }
+  .phone-sep {
+    width: 1px;
+    height: 22px;
+    background: rgba(201,168,76,0.35);
+    margin: 0 28px;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+  .logo-wings {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.7;
+  }
+  .wing-line {
+    width: 28px;
+    height: 0.5px;
+    background: #C9A84C;
+  }
+  .wing-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #C9A84C;
+  }
+
+  .logo-frame {
+    width: 64px;
+    height: 64px;
+    border: 1px solid rgba(201,168,76,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .logo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 0.5px solid rgba(201,168,76,0.3);
+  }
+  .logo-letter {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: #C9A84C;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Nome da marca */
+  .brand-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #F5E6C8;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+</style>
+</head>
+<body>
+<div class="post">
+
+  <!-- FOTO — substitua pizza.jpg pelo arquivo real -->
+  <img class="pizza-img" src="pizza.jpg" alt="Pizza artesanal"
+    onerror="this.style.display='none'; document.querySelector('.pizza-img-placeholder').style.display='flex';">
+  <div class="pizza-img-placeholder" style="display:none;">— coloque pizza.jpg nesta pasta —</div>
+
+  <!-- GRADIENTE -->
+  <div class="gradient-overlay"></div>
+
+  <!-- CANTOS DECORATIVOS -->
+  <div class="frame-tl"></div>
+  <div class="frame-tr"></div>
+  <div class="frame-bl"></div>
+  <div class="frame-br"></div>
+
+  <!-- TAGLINE SUPERIOR -->
+  <p class="tagline">forno à lenha · desde 2007</p>
+
+  <!-- MARCA -->
+  <div class="brand-section">
+
+    <!-- ornamento -->
+    <div class="orn">
+      <div class="orn-line rev"></div>
+      <div class="orn-dot"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-dot"></div>
+      <div class="orn-line"></div>
+    </div>
+
+    <!-- telefones -->
+    <div class="phones">
+      <span class="phone">3931-0052</span>
+      <div class="phone-sep"></div>
+      <span class="phone">3932-2925</span>
+    </div>
+
+    <!-- logo + nome -->
+    <div class="logo-wrap">
+      <div class="logo-wings">
+        <div class="wing-dot"></div>
+        <div class="wing-line"></div>
+        <div class="wing-dot"></div>
+      </div>
+      <div class="logo-frame">
+        <span class="logo-letter">A</span>
+      </div>
+      <div class="logo-wings" style="transform:scaleX(-1)">
+        <div class="wing-dot"></div>
+        <div class="wing-line"></div>
+        <div class="wing-dot"></div>
+      </div>
+    </div>
+
+    <p class="brand-name">Artes da Pizza</p>
+
+  </div>
+</div>
+</body>
+</html>
