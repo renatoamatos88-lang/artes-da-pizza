@@ -37,3 +37,36 @@ Dependências: `pip install "rembg[cpu]" pillow numpy`. Na primeira execução o
    com um dedo de sobra em volta, luz de janela, sem flash. Com isso, `compor_fotos.py --todas`
    monta a versão tábua sem inventar nada.
 3. Pedir à Nalva uma foto de cima de uma tábua vazia → salvar em `Imagem Pizzas/_fundos/tabua.jpg`.
+
+---
+
+## Atualização 29/set — caminho DaVinci (retoque leve)
+
+**Decisão final de estilo:** "retoque leve" (mantém caixa/luz de pizzaria de bairro; só enquadra, endireita
+perspectiva e tira data) + cor quente + nitidez local. O cenário de tábua foi descartado: "muito falso".
+
+**Pipeline atual (3 passos):**
+1. `preparar_entrada.py` → recorta quadrado centrado na pizza em `Imagem Pizzas/_entrada/` (17 fotos prontas).
+2. DaVinci (Nano Banana 2, 1:1, 0.5K → sai 512px), prompt "Light retouch…" (ver `PROMPT` no histórico do DaVinci
+   ou no bloco abaixo). Baixar e salvar em `Imagem Pizzas/_davinci_bruto/<sabor>.png`.
+3. `polir_fotos.py` → esquenta cor, luz, nitidez, 1200×1200 em `Imagem Pizzas/_final/`.
+
+**Feitas (3/17):** Aliche, 2 queijos, 4 queijos → `_final/`.
+**Bloqueio:** créditos da assinatura do DaVinci acabaram (pop-up "Garanta mais créditos"). Baixar não gasta crédito;
+gerar sim. Restam 14 pizzas: Alcachofra especial, Alho poró, Alho, Brocolis 3, Caipira, Carne seca, Chocolate com
+Morango, Escarola, Frango Especial, Lombo 2, Marguerita Especial, Napolitana, Rucula, Toscana.
+
+**Lições de automação (DaVinci não tem lote):** uma imagem por geração; o upscale do DaVinci (2x, gasta crédito)
+é dispensável — nitidez local resolve no tamanho do app. Digitar o prompt com `type` falha intermitente após upload;
+funciona inserir via JS (`document.execCommand('insertText')` no `[role=textbox]`). Refs do file input mudam entre
+páginas: sempre `read_page` antes do `file_upload`.
+
+**Prompt usado:** "Light retouch of this real photo, not a re-creation. This is a pizza from an ordinary neighborhood
+pizzeria in Sao Paulo, photographed with a regular phone. Keep the photo exactly as it is: the same pizza, same toppings
+in the same positions, same olives, same crust and burnt spots, same ordinary lighting and colors, and keep whatever
+the pizza sits on (cardboard box, tray or oven floor) as it is. Do not redraw, re-render, smooth or beautify the pizza;
+keep natural imperfections, uneven cheese and slight oil shine. ONLY do this: crop to a square 1:1 so the whole pizza is
+visible, centered and fills about 85% of the frame width (crop closer if the pizza is small in the frame), gently
+straighten the perspective so the pizza looks less tilted, remove any date/time stamp text, and clean small dirt on the
+box and countertop. No studio look, no dramatic shadows, no color boost, no gourmet styling, no wooden board, no new
+props. It must look like a genuine snapshot taken by the pizzeria owner, just well framed."
