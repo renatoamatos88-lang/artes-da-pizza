@@ -51,7 +51,7 @@ perspectiva e tira data) + cor quente + nitidez local. O cenário de tábua foi 
    ou no bloco abaixo). Baixar e salvar em `Imagem Pizzas/_davinci_bruto/<sabor>.png`.
 3. `polir_fotos.py` → esquenta cor, luz, nitidez, 1200×1200 em `Imagem Pizzas/_final/`.
 
-**Feitas (3/17):** Aliche, 2 queijos, 4 queijos → `_final/`.
+**Feitas (17/17):** 3 via DaVinci (Aliche, 2 queijos, 4 queijos) + 14 só com enquadramento + polimento local (sem DaVinci, sem correção de perspectiva). Datas da câmera apagadas em `CARIMBOS` (`polir_fotos.py`). Saída: `Imagem Pizzas/_final/`.
 **Bloqueio:** créditos da assinatura do DaVinci acabaram (pop-up "Garanta mais créditos"). Baixar não gasta crédito;
 gerar sim. Restam 14 pizzas: Alcachofra especial, Alho poró, Alho, Brocolis 3, Caipira, Carne seca, Chocolate com
 Morango, Escarola, Frango Especial, Lombo 2, Marguerita Especial, Napolitana, Rucula, Toscana.
