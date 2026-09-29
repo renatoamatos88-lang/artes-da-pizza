@@ -70,3 +70,32 @@ visible, centered and fills about 85% of the frame width (crop closer if the piz
 straighten the perspective so the pizza looks less tilted, remove any date/time stamp text, and clean small dirt on the
 box and countertop. No studio look, no dramatic shadows, no color boost, no gourmet styling, no wooden board, no new
 props. It must look like a genuine snapshot taken by the pizzeria owner, just well framed."
+
+---
+
+## Atualização 29/set (tarde) — caminho GEMINI (o que vale agora)
+
+**Gemini web (conta pessoal do Renato, plano Plus, modo "Imagens", modelo Pro) é o melhor resultado e não gasta crédito.**
+Saída 2048×2048. Muito melhor que o DaVinci. Prompt-padrão e TODAS as regras que ele foi apontando estão em
+`prompt_fotos_gemini.md` (chão limpo neutro, sem sombra de quem tira a foto, sem data, mantém caixa, fiel à pizza).
+Memória de feedback: `feedback-fotos-pizza-estilo`.
+
+**Status:** 1/17 no padrão novo — `Imagem Pizzas/_gemini/Alcachofra especial.jpg` (aguarda ok do Renato).
+As outras 16 estão em `_final/` só com o padrão antigo (recorte + cor) e devem ser refeitas no Gemini.
+Faltam: 2 queijos, 4 queijos, Alho poró, Alho, Aliche, Brocolis 3, Caipira, Carne seca, Chocolate com Morango, Escarola,
+Frango Especial, Lombo 2, Marguerita Especial, Napolitana, Rucula, Toscana. Entradas prontas em `_entrada/`.
+
+**Como operar o Gemini pelo Chrome (extensão Claude in Chrome) — o que aprendemos:**
+- A aba do Gemini PRECISA ficar visível (em primeiro plano); em segundo plano o Chrome pausa a geração.
+- Upload: abrir o menu "Envio e ferramentas" (JS: clicar botão com aria-label) → `read_page` filter interactive →
+  o container do menu é o `generic` logo antes dos menuitems "Enviar arquivos"; `read_page` com `ref_id` dele (filter all)
+  mostra 3 `type=file`; o do meio (aceita image/*) é o certo → `file_upload`.
+- Texto: inserir via JS `document.execCommand('insertText')` no `[contenteditable=true]` (o `type` falha). Enviar com a
+  tecla Enter (o click via JS no botão não disparou).
+- Esperar ~30–60s; baixar: rolar o último botão `aria-label="Baixar imagem no tamanho original"` para o centro e clicar
+  por coordenada (x≈1166, y≈260 no quadro de 1568px). Cai em `Downloads/Gemini_Generated_Image_*.jpg`.
+- O Gemini bloqueia `fetch` a localhost (CSP) — não dá para a página puxar arquivos locais.
+- Editar em conversa (ex.: "troque o chão por superfície neutra…") preserva a pizza melhor que refazer do zero.
+
+**Custo de sessão:** sessão longa fica cara por chamada (contexto grande). Melhor continuar numa sessão NOVA
+lendo só este arquivo + `prompt_fotos_gemini.md`.
