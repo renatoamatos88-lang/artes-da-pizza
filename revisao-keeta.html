@@ -1,0 +1,591 @@
+<title>Revisão de Preços no Keeta</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{
+  --ground:#FBF6E3;
+  --surface:#FFFCF2;
+  --surface-2:#F5EEDA;
+  --wine:#7A1619;
+  --wine-soft:#A6262A;
+  --ink:#2B1C14;
+  --muted:#8B7A66;
+  --line:#E2D7BE;
+  --ok:#2F6F4F;
+  --ok-bg:#E4EFE6;
+  --warn:#8A5A06;
+  --warn-bg:#F7EBD2;
+  --crit:#C43C16;
+  --crit-bg:#FBE3D8;
+  --absent:#6B6157;
+  --absent-bg:#EDE7DA;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#191410;
+    --surface:#211A15;
+    --surface-2:#2A211A;
+    --wine:#C4443F;
+    --wine-soft:#D6685F;
+    --ink:#F2E9DA;
+    --muted:#A6947E;
+    --line:#3A2E24;
+    --ok:#7FC49A;
+    --ok-bg:#1E3328;
+    --warn:#D9A648;
+    --warn-bg:#362A14;
+    --crit:#F0805A;
+    --crit-bg:#3B2018;
+    --absent:#A2968A;
+    --absent-bg:#2B241E;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#191410;
+  --surface:#211A15;
+  --surface-2:#2A211A;
+  --wine:#C4443F;
+  --wine-soft:#D6685F;
+  --ink:#F2E9DA;
+  --muted:#A6947E;
+  --line:#3A2E24;
+  --ok:#7FC49A;
+  --ok-bg:#1E3328;
+  --warn:#D9A648;
+  --warn-bg:#362A14;
+  --crit:#F0805A;
+  --crit-bg:#3B2018;
+  --absent:#A2968A;
+  --absent-bg:#2B241E;
+}
+
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+}
+*{box-sizing:border-box}
+
+.band{
+  background:var(--wine);
+  color:#FBF6E3;
+  padding-block:22px 20px;
+}
+:root[data-theme="dark"] .band,
+:root:not([data-theme="light"]) .band{color:#1A1209}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .band{color:#FBF6E3}}
+.wrap{
+  width:100%;
+  max-width:920px;
+  margin-inline:auto;
+  padding-inline:20px;
+}
+.band__eyebrow{
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:.82;
+  margin:0 0 6px;
+}
+.band__title{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(25px,5.4vw,36px);
+  line-height:1.12;
+  margin:0;
+  text-wrap:balance;
+}
+.band__sub{
+  margin:10px 0 0;
+  font-size:14.5px;
+  opacity:.9;
+  max-width:60ch;
+}
+
+main{padding-block:26px 48px}
+
+.tiles{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(128px,1fr));
+  gap:10px;
+  margin:0 0 30px;
+}
+.tile{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:14px 14px 12px;
+}
+.tile--flag{border-left:4px solid var(--crit)}
+.tile__n{
+  font-family:var(--display);
+  font-size:30px;
+  font-weight:700;
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+  display:block;
+}
+.tile--good .tile__n{color:var(--ok)}
+.tile--flag .tile__n{color:var(--crit)}
+.tile__l{
+  font-size:12.5px;
+  color:var(--muted);
+  display:block;
+  margin-top:6px;
+  line-height:1.35;
+}
+
+h2{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:22px;
+  margin:0 0 4px;
+  text-wrap:balance;
+}
+.lede{
+  color:var(--muted);
+  font-size:14.5px;
+  margin:0 0 18px;
+  max-width:62ch;
+}
+section{margin-bottom:40px}
+
+.q{
+  border-top:1px solid var(--line);
+  padding:18px 0;
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:2px 14px;
+}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.q__i{
+  font-family:var(--display);
+  font-size:15px;
+  font-weight:700;
+  color:var(--wine-soft);
+  font-variant-numeric:tabular-nums;
+  padding-top:1px;
+}
+.q__h{
+  font-size:16.5px;
+  font-weight:700;
+  margin:0 0 6px;
+  line-height:1.35;
+}
+.q__b{grid-column:2}
+.q__b p{margin:0 0 10px;font-size:15px}
+.q__b p:last-child{margin-bottom:0}
+.q__ask{
+  color:var(--wine-soft);
+  font-weight:600;
+}
+.q--urgent .q__i{color:var(--crit)}
+
+.mini{
+  width:100%;
+  border-collapse:collapse;
+  margin:4px 0 12px;
+  font-size:14px;
+  font-variant-numeric:tabular-nums;
+}
+.mini th,.mini td{
+  text-align:right;
+  padding:5px 8px;
+  border-bottom:1px solid var(--line);
+}
+.mini th:first-child,.mini td:first-child{text-align:left;font-weight:600}
+.mini thead th{
+  font-size:11px;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:600;
+}
+.bad{color:var(--crit);font-weight:700}
+.good{color:var(--ok)}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:0 0 4px;
+  padding:0;
+  list-style:none;
+}
+.chips li{
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:2px;
+  padding:4px 9px;
+  font-size:13.5px;
+}
+
+.bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+  margin:0 0 14px;
+}
+.bar button{
+  font:inherit;
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--muted);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:2px;
+  padding:6px 12px;
+  cursor:pointer;
+}
+.bar button:hover{color:var(--ink)}
+.bar button[aria-pressed="true"]{
+  background:var(--wine);
+  border-color:var(--wine);
+  color:#FBF6E3;
+}
+:root[data-theme="dark"] .bar button[aria-pressed="true"],
+:root:not([data-theme="light"]) .bar button[aria-pressed="true"]{color:#1A1209}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .bar button[aria-pressed="true"]{color:#FBF6E3}
+}
+.bar button:focus-visible{outline:2px solid var(--wine-soft);outline-offset:2px}
+
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table.full{
+  width:100%;
+  min-width:640px;
+  border-collapse:collapse;
+  font-size:14px;
+}
+table.full thead th{
+  position:sticky;
+  top:0;
+  background:var(--surface-2);
+  font-size:10.5px;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+  text-align:right;
+  padding:9px 8px;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+table.full thead th:nth-child(1),
+table.full thead th:nth-child(2){text-align:left}
+table.full .grp th{
+  text-align:center;
+  border-left:1px solid var(--line);
+}
+table.full tbody td{
+  padding:8px;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+table.full tbody tr:last-child td{border-bottom:0}
+.n{
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+  font-size:12.5px;
+  width:34px;
+  padding-top:10px !important;
+}
+.sabor{min-width:150px}
+.sabor__nome{font-weight:600;display:block;line-height:1.3}
+.obs{
+  display:block;
+  font-size:12px;
+  color:var(--wine-soft);
+  font-style:italic;
+  margin-top:1px;
+}
+.num{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  width:88px;
+}
+.num--bad{color:var(--crit);font-weight:700}
+.num--miss{color:var(--warn);font-size:13px;font-style:italic}
+.muted{color:var(--muted)}
+td.st{text-align:right;width:112px}
+
+.pill{
+  display:inline-block;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.02em;
+  padding:2px 8px;
+  border-radius:2px;
+  white-space:nowrap;
+  margin:1px 0 1px 3px;
+}
+.pill--ok{background:var(--ok-bg);color:var(--ok)}
+.pill--crit{background:var(--crit-bg);color:var(--crit)}
+.pill--warn{background:var(--warn-bg);color:var(--warn)}
+.pill--ausente{background:var(--absent-bg);color:var(--absent)}
+
+tr[hidden]{display:none}
+
+.foot{
+  border-top:1px solid var(--line);
+  padding-top:16px;
+  color:var(--muted);
+  font-size:13px;
+  max-width:70ch;
+}
+.foot p{margin:0 0 7px}
+.foot strong{color:var(--ink)}
+
+@media (max-width:560px){
+  .q{grid-template-columns:26px 1fr;gap:2px 10px}
+  .tile__n{font-size:26px}
+}
+</style>
+
+<header class="band">
+  <div class="wrap">
+    <p class="band__eyebrow">Artes da Pizza · desde 2007</p>
+    <h1 class="band__title">Revisão de preços no Keeta</h1>
+    <p class="band__sub">Conferimos os 68 itens do cardápio contra o que está cadastrado no aplicativo. A regra combinada é: preço do Keeta = preço do balcão + 30%. Os erros de preço já foram corrigidos em 15/09; o que sobrou depende de confirmação da Nalva.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="tiles">
+    <div class="tile tile--good">
+      <span class="tile__n">61</span>
+      <span class="tile__l">itens certos, nos dois tamanhos</span>
+    </div>
+    <div class="tile tile--good">
+      <span class="tile__n">5</span>
+      <span class="tile__l">preços já corrigidos hoje</span>
+    </div>
+    <div class="tile">
+      <span class="tile__n">4</span>
+      <span class="tile__l">sem o tamanho broto</span>
+    </div>
+    <div class="tile">
+      <span class="tile__n">1</span>
+      <span class="tile__l">não estão no aplicativo</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>Já corrigido no aplicativo</h2>
+    <p class="lede">Cinco preços estavam fora da regra e foram ajustados em 15/09. Já estão valendo para quem pedir agora.</p>
+    <table class="mini">
+      <thead><tr><th>Item</th><th>Tamanho</th><th>Estava</th><th>Passou a ser</th></tr></thead>
+      <tbody>
+        <tr><td>Camarão</td><td>Broto</td><td class="bad">R$ 75,00</td><td class="good">R$ 109,20</td></tr>
+        <tr><td>Filé Mignon</td><td>Broto</td><td class="bad">R$ 75,00</td><td class="good">R$ 109,20</td></tr>
+        <tr><td>Atum</td><td>Broto</td><td class="bad">R$ 56,90</td><td class="good">R$ 55,90</td></tr>
+        <tr><td>Atum</td><td>Grande</td><td class="bad">R$ 89,90</td><td class="good">R$ 89,70</td></tr>
+        <tr><td>Escarola Especial</td><td>Broto</td><td class="bad">R$ 67,60</td><td class="good">R$ 66,30</td></tr>
+      </tbody>
+    </table>
+    <p class="lede" style="margin-top:14px">Camarão e Filé Mignon no broto estavam saindo por menos do que custam no balcão — era o ponto mais caro da lista. Por decisão do Renato, o arredondamento do <strong>grande</strong> desses dois (R$&nbsp;169,90 e R$&nbsp;168,90) ficou como estava.</p>
+  </section>
+
+  <section>
+    <h2>O que precisa da sua confirmação</h2>
+    <p class="lede">Sobraram 5 pontos. Pode responder na ordem — cada resposta vira um ajuste no painel.</p>
+
+    <div class="q">
+      <div class="q__i">01</div>
+      <h3 class="q__h">Oito sabores do cardápio não estão no aplicativo</h3>
+      <div class="q__b">
+        <ul class="chips">
+          <li>Aladinele</li><li>Caipira</li><li>Do Pizzaiolo</li><li>Frango Catupiry</li>
+          <li>Frango Especial</li><li>Siciliana</li><li>Strogonoff</li><li>Torta Holandesa</li>
+        </ul>
+        <p>Frango Catupiry e Strogonoff costumam ser dos mais pedidos, então vale olhar com atenção.</p>
+        <p class="q__ask">Esses saíram de propósito ou faltou cadastrar? Se for pra entrar, já temos o preço calculado de cada um.</p>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q__i">02</div>
+      <h3 class="q__h">As pizzas doces só existem no tamanho grande</h3>
+      <div class="q__b">
+        <table class="mini">
+          <thead><tr><th>Doce</th><th>Broto ficaria</th><th>Grande (já certo)</th></tr></thead>
+          <tbody>
+            <tr><td>Banana</td><td>R$ 48,10</td><td class="good">R$ 78,00</td></tr>
+            <tr><td>Brigadeiro</td><td>R$ 48,10</td><td class="good">R$ 78,00</td></tr>
+            <tr><td>Romeu e Julieta</td><td>R$ 48,10</td><td class="good">R$ 78,00</td></tr>
+            <tr><td>Chocolate com Morango</td><td>R$ 57,20</td><td class="good">R$ 91,00</td></tr>
+          </tbody>
+        </table>
+        <p class="q__ask">Quer vender doce em broto pelo aplicativo? Se sim, é só cadastrar com esses valores.</p>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q__i">03</div>
+      <h3 class="q__h">A borda no tamanho grande custa mais que no cardápio</h3>
+      <div class="q__b">
+        <table class="mini">
+          <thead><tr><th>Borda</th><th>Cardápio</th><th>App · broto</th><th>App · grande</th></tr></thead>
+          <tbody>
+            <tr><td>Catupiry</td><td>R$ 14,00</td><td class="good">R$ 14,00</td><td class="bad">R$ 16,00</td></tr>
+            <tr><td>Cheddar</td><td>R$ 10,00</td><td class="good">R$ 10,00</td><td class="bad">R$ 14,00</td></tr>
+          </tbody>
+        </table>
+        <p>No broto a borda sai pelo mesmo preço do balcão. No grande, sai mais cara nas duas opções.</p>
+        <p class="q__ask">Foi decisão sua cobrar mais no grande, ou era pra ser igual ao cardápio nos dois tamanhos?</p>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q__i">04</div>
+      <h3 class="q__h">A “Especial” aparece como “Pizza Classic” no aplicativo</h3>
+      <div class="q__b">
+        <p>O preço bate certinho com a Especial do cardápio (R$&nbsp;80,60 no broto e R$&nbsp;128,70 no grande), mas o nome está diferente.</p>
+        <p class="q__ask">É a mesma pizza? Se for, vale renomear pra “Especial” e não confundir o cliente.</p>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q__i">05</div>
+      <h3 class="q__h">A borda no cardápio não separa broto de grande</h3>
+      <div class="q__b">
+        <p>O cardápio impresso traz um preço só de borda — Catupiry R$&nbsp;14,00 e Cheddar R$&nbsp;10,00 — sem dizer se muda conforme o tamanho da pizza.</p>
+        <p class="q__ask">No balcão vocês cobram o mesmo valor de borda para broto e grande?</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Os 68 itens, um por um</h2>
+    <p class="lede">“Deveria” é o preço do balcão mais 30%. “No app” é o que está cadastrado hoje. Em vermelho, o que não bate.</p>
+
+    <div class="bar" role="group" aria-label="Filtrar itens">
+      <button type="button" id="f-todos" data-f="todos" aria-pressed="true">Todos os 68</button>
+      <button type="button" id="f-revisar" data-f="revisar" aria-pressed="false">Só os 7 pendentes</button>
+      <button type="button" id="f-ok" data-f="ok" aria-pressed="false">Só os que conferem</button>
+    </div>
+
+    <div class="tablebox">
+      <table class="full">
+        <thead>
+          <tr class="grp">
+            <th colspan="2"></th>
+            <th colspan="2">Broto</th>
+            <th colspan="2">Grande</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>Nº</th>
+            <th>Sabor</th>
+            <th>Deveria</th>
+            <th>No app</th>
+            <th>Deveria</th>
+            <th>No app</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody id="corpo">
+<tr data-g="ok"><td class="n">01</td><td class="sabor"><span class="sabor__nome">2 Queijos</span></td><td class="num">R$ 66,30</td><td class="num">R$ 66,30</td><td class="num">R$ 106,60</td><td class="num">R$ 106,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">02</td><td class="sabor"><span class="sabor__nome">4 Queijos</span></td><td class="num">R$ 74,10</td><td class="num">R$ 74,10</td><td class="num">R$ 118,30</td><td class="num">R$ 118,30</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">03</td><td class="sabor"><span class="sabor__nome">5 Queijos</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">04</td><td class="sabor"><span class="sabor__nome">À Moda da Casa</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">05</td><td class="sabor"><span class="sabor__nome">Abobrinha</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">06</td><td class="sabor"><span class="sabor__nome">Aladinele</span></td><td class="num">R$ 68,90</td><td class="num">R$ 68,90</td><td class="num">R$ 110,50</td><td class="num">R$ 110,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">07</td><td class="sabor"><span class="sabor__nome">Alcachofra</span></td><td class="num">R$ 71,50</td><td class="num">R$ 71,50</td><td class="num">R$ 114,40</td><td class="num">R$ 114,40</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">08</td><td class="sabor"><span class="sabor__nome">Alcachofra Especial</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">09</td><td class="sabor"><span class="sabor__nome">Alho</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">10</td><td class="sabor"><span class="sabor__nome">Alho Poró</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">11</td><td class="sabor"><span class="sabor__nome">Aliche Importado</span></td><td class="num">R$ 79,30</td><td class="num">R$ 79,30</td><td class="num">R$ 123,50</td><td class="num">R$ 123,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">12</td><td class="sabor"><span class="sabor__nome">Americana</span></td><td class="num">R$ 74,10</td><td class="num">R$ 74,10</td><td class="num">R$ 118,30</td><td class="num">R$ 118,30</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">13</td><td class="sabor"><span class="sabor__nome">Artes da Pizza</span></td><td class="num">R$ 62,40</td><td class="num">R$ 62,40</td><td class="num">R$ 101,40</td><td class="num">R$ 101,40</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">14</td><td class="sabor"><span class="sabor__nome">Atum</span></td><td class="num">R$ 55,90</td><td class="num">R$ 55,90</td><td class="num">R$ 89,70</td><td class="num">R$ 89,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">15</td><td class="sabor"><span class="sabor__nome">Atum Especial</span></td><td class="num">R$ 71,50</td><td class="num">R$ 71,50</td><td class="num">R$ 114,40</td><td class="num">R$ 114,40</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">16</td><td class="sabor"><span class="sabor__nome">Bacon</span></td><td class="num">R$ 62,40</td><td class="num">R$ 62,40</td><td class="num">R$ 101,40</td><td class="num">R$ 101,40</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">17</td><td class="sabor"><span class="sabor__nome">Baiana</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 93,60</td><td class="num">R$ 93,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">18</td><td class="sabor"><span class="sabor__nome">Berinjela</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 93,60</td><td class="num">R$ 93,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">19</td><td class="sabor"><span class="sabor__nome">Brócolis</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 93,60</td><td class="num">R$ 93,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">20</td><td class="sabor"><span class="sabor__nome">Brocolis II</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">21</td><td class="sabor"><span class="sabor__nome">Brócolis III</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">22</td><td class="sabor"><span class="sabor__nome">Búfala</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">23</td><td class="sabor"><span class="sabor__nome">Caipira</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 107,90</td><td class="num">R$ 107,90</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">24</td><td class="sabor"><span class="sabor__nome">Calabresa</span></td><td class="num">R$ 55,90</td><td class="num">R$ 55,90</td><td class="num">R$ 89,70</td><td class="num">R$ 89,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">25</td><td class="sabor"><span class="sabor__nome">Calacatú</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 107,90</td><td class="num">R$ 107,90</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="erro"><td class="n">26</td><td class="sabor"><span class="sabor__nome">Camarão</span></td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="num">R$ 169,00</td><td class="num num--bad">R$ 169,90</td><td class="st"><span class="pill pill--crit">grande errado</span></td></tr>
+<tr data-g="ok"><td class="n">27</td><td class="sabor"><span class="sabor__nome">Caprichosa</span></td><td class="num">R$ 71,50</td><td class="num">R$ 71,50</td><td class="num">R$ 115,70</td><td class="num">R$ 115,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">28</td><td class="sabor"><span class="sabor__nome">Carne Seca</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">29</td><td class="sabor"><span class="sabor__nome">Catupiry</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 91,00</td><td class="num">R$ 91,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">30</td><td class="sabor"><span class="sabor__nome">Classe Especial</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 91,00</td><td class="num">R$ 91,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">31</td><td class="sabor"><span class="sabor__nome">Do Pizzaiolo</span></td><td class="num">R$ 66,30</td><td class="num">R$ 66,30</td><td class="num">R$ 106,60</td><td class="num">R$ 106,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">32</td><td class="sabor"><span class="sabor__nome">Escarola</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 91,00</td><td class="num">R$ 91,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">33</td><td class="sabor"><span class="sabor__nome">Escarola Especial</span></td><td class="num">R$ 66,30</td><td class="num">R$ 66,30</td><td class="num">R$ 106,60</td><td class="num">R$ 106,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">34</td><td class="sabor"><span class="sabor__nome">Espanhola</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">35</td><td class="sabor"><span class="sabor__nome">Especial</span><span class="obs">cadastrado como “Pizza Classic”</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">36</td><td class="sabor"><span class="sabor__nome">Executiva</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">37</td><td class="sabor"><span class="sabor__nome">Favorita</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="erro"><td class="n">38</td><td class="sabor"><span class="sabor__nome">Filé Mignon</span></td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="num">R$ 169,00</td><td class="num num--bad">R$ 168,90</td><td class="st"><span class="pill pill--crit">grande errado</span></td></tr>
+<tr data-g="ok"><td class="n">39</td><td class="sabor"><span class="sabor__nome">Frango Catupiry</span></td><td class="num">R$ 63,70</td><td class="num">R$ 63,70</td><td class="num">R$ 102,70</td><td class="num">R$ 102,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">40</td><td class="sabor"><span class="sabor__nome">Frango Especial</span></td><td class="num">R$ 68,90</td><td class="num">R$ 68,90</td><td class="num">R$ 110,50</td><td class="num">R$ 110,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">41</td><td class="sabor"><span class="sabor__nome">Jardineira</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">42</td><td class="sabor"><span class="sabor__nome">Light</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">43</td><td class="sabor"><span class="sabor__nome">Lombo</span></td><td class="num">R$ 55,90</td><td class="num">R$ 55,90</td><td class="num">R$ 89,70</td><td class="num">R$ 89,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">44</td><td class="sabor"><span class="sabor__nome">Lombo II</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">45</td><td class="sabor"><span class="sabor__nome">Marguerita</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">46</td><td class="sabor"><span class="sabor__nome">Marguerita Especial</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">47</td><td class="sabor"><span class="sabor__nome">Milho</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">48</td><td class="sabor"><span class="sabor__nome">Mista</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 91,00</td><td class="num">R$ 91,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">49</td><td class="sabor"><span class="sabor__nome">Mussarela</span></td><td class="num">R$ 55,90</td><td class="num">R$ 55,90</td><td class="num">R$ 89,70</td><td class="num">R$ 89,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">50</td><td class="sabor"><span class="sabor__nome">Napolitana</span></td><td class="num">R$ 58,50</td><td class="num">R$ 58,50</td><td class="num">R$ 93,60</td><td class="num">R$ 93,60</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">51</td><td class="sabor"><span class="sabor__nome">Palmito</span></td><td class="num">R$ 78,00</td><td class="num">R$ 78,00</td><td class="num">R$ 122,20</td><td class="num">R$ 122,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">52</td><td class="sabor"><span class="sabor__nome">Pepperone</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">53</td><td class="sabor"><span class="sabor__nome">Peruana</span></td><td class="num">R$ 80,60</td><td class="num">R$ 80,60</td><td class="num">R$ 128,70</td><td class="num">R$ 128,70</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">54</td><td class="sabor"><span class="sabor__nome">Portuguesa</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">55</td><td class="sabor"><span class="sabor__nome">Portuguesa II</span></td><td class="num">R$ 79,30</td><td class="num">R$ 79,30</td><td class="num">R$ 123,50</td><td class="num">R$ 123,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">56</td><td class="sabor"><span class="sabor__nome">Primeira Classe</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">57</td><td class="sabor"><span class="sabor__nome">Romana</span></td><td class="num">R$ 84,50</td><td class="num">R$ 84,50</td><td class="num">R$ 136,50</td><td class="num">R$ 136,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">58</td><td class="sabor"><span class="sabor__nome">Rúcula</span></td><td class="num">R$ 79,30</td><td class="num">R$ 79,30</td><td class="num">R$ 123,50</td><td class="num">R$ 123,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">59</td><td class="sabor"><span class="sabor__nome">Siciliana</span></td><td class="num">R$ 67,60</td><td class="num">R$ 67,60</td><td class="num">R$ 109,20</td><td class="num">R$ 109,20</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">60</td><td class="sabor"><span class="sabor__nome">Strogonoff</span></td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="num">R$ 156,00</td><td class="num">R$ 156,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">61</td><td class="sabor"><span class="sabor__nome">Tomate Seco</span></td><td class="num">R$ 59,80</td><td class="num">R$ 59,80</td><td class="num">R$ 97,50</td><td class="num">R$ 97,50</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">62</td><td class="sabor"><span class="sabor__nome">Toscana</span></td><td class="num">R$ 63,70</td><td class="num">R$ 63,70</td><td class="num">R$ 104,00</td><td class="num">R$ 104,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="ok"><td class="n">63</td><td class="sabor"><span class="sabor__nome">Vegetariana</span></td><td class="num">R$ 72,80</td><td class="num">R$ 72,80</td><td class="num">R$ 117,00</td><td class="num">R$ 117,00</td><td class="st"><span class="pill pill--ok">confere</span></td></tr>
+<tr data-g="falta"><td class="n">64</td><td class="sabor"><span class="sabor__nome">Banana</span></td><td class="num">R$ 48,10</td><td class="num num--miss">não tem</td><td class="num">R$ 78,00</td><td class="num">R$ 78,00</td><td class="st"><span class="pill pill--warn">sem broto</span></td></tr>
+<tr data-g="falta"><td class="n">65</td><td class="sabor"><span class="sabor__nome">Brigadeiro</span></td><td class="num">R$ 48,10</td><td class="num num--miss">não tem</td><td class="num">R$ 78,00</td><td class="num">R$ 78,00</td><td class="st"><span class="pill pill--warn">sem broto</span></td></tr>
+<tr data-g="falta"><td class="n">66</td><td class="sabor"><span class="sabor__nome">Romeu e Julieta</span></td><td class="num">R$ 48,10</td><td class="num num--miss">não tem</td><td class="num">R$ 78,00</td><td class="num">R$ 78,00</td><td class="st"><span class="pill pill--warn">sem broto</span></td></tr>
+<tr data-g="falta"><td class="n">67</td><td class="sabor"><span class="sabor__nome">Chocolate com Morango</span></td><td class="num">R$ 57,20</td><td class="num num--miss">não tem</td><td class="num">R$ 91,00</td><td class="num">R$ 91,00</td><td class="st"><span class="pill pill--warn">sem broto</span></td></tr>
+<tr data-g="ausente"><td class="n">68</td><td class="sabor"><span class="sabor__nome">Torta Holandesa</span></td><td class="num">R$ 15,60</td><td class="num num--miss">não tem</td><td class="num muted">—</td><td class="num muted">—</td><td class="st"><span class="pill pill--ausente">fora do app</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p><strong>De onde vêm os números.</strong> Preços do balcão: tabela oficial da pizzaria (arquivo de preços corrigidos). Preços do aplicativo: lidos direto do painel do Keeta em 15 de setembro de 2026 — é o que o cliente vê agora, não estimativa.</p>
+    <p>Os 4 sabores de pizza doce aparecem como “sem broto” porque o aplicativo só tem o tamanho grande cadastrado para eles. A Torta Holandesa não está no aplicativo em nenhum formato.</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var linhas = Array.prototype.slice.call(document.querySelectorAll('#corpo tr'));
+  var botoes = Array.prototype.slice.call(document.querySelectorAll('.bar button'));
+  function aplicar(f){
+    linhas.forEach(function(tr){
+      var g = tr.getAttribute('data-g');
+      var mostra = f === 'todos' || (f === 'ok' && g === 'ok') || (f === 'revisar' && g !== 'ok');
+      tr.hidden = !mostra;
+    });
+    botoes.forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === f));
+    });
+  }
+  botoes.forEach(function(b){
+    b.addEventListener('click', function(){ aplicar(b.getAttribute('data-f')); });
+  });
+})();
+</script>
